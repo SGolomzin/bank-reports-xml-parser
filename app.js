@@ -22,7 +22,7 @@ program
 				const failedResults = results.filter(result => result.status === "rejected");
 				const fulfilledResults = results.filter(result => result.status === "fulfilled");
 
-				log.msg(`\nОбработано ${results.length} ${declOfNum(failedResults.length, ['отчет', 'отчета', 'отчетов'])}.`)
+				log.msg(`\nОбработано ${results.length} ${declOfNum(results.length, ['отчет', 'отчета', 'отчетов'])}.`)
 
 				if (failedResults.length) {
 					const logfilename = createCurrentDateString(new Date) + '.log';

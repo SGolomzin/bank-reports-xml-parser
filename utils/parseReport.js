@@ -68,6 +68,7 @@ const parseReport = (filedata, filename = '') => {
 }
 
 const isValid = (template) => {
+	if (!template) return false;
 	return Boolean(template.name
 		&& template.path
 		&& Array.isArray(template.path)
