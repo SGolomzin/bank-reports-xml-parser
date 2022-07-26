@@ -1,0 +1,79 @@
+name: NSKI
+path:
+  - get: /product/preply/report
+  - find: //AccountReply
+parseBy: element
+parse:
+  collateral/fileSinceDt:
+    as: collateral/fileSinceDt
+  collateral/serialNum:
+    as: collateral/serialNum
+  collateral/agreementNumber:
+    as: collateral/agreementNumber
+  collateral/collateralCode:
+    as: collateral/collateralCode
+  collateral/collateralValue:
+    as: collateral/collateralValue
+  collateral/currencyCode:
+    as: collateral/currencyCode
+  collateral/collateralDate:
+    as: collateral/collateralDate
+  collateral/collateralExpirationDate:
+    as: collateral/collateralExpirationDate
+  collateral/collateral2Text:
+    as: collateral/collateral2Text
+  collateral/lastUpdatedDt:
+    as: collateral/lastUpdatedDt
+  collateral/freezeFlag:
+    as: collateral/freezeFlag
+  collateral/suppressFlag:
+    as: collateral/suppressFlag
+  uuid:
+  serialNum:
+  fileSinceDt:
+  ownerIndic:
+  ownerIndicText:
+  openedDt:
+  lastPaymtDt:
+  closedDt:
+  reportingDt:
+  acctType:
+  acctTypeText:
+  currencyCode:
+  creditLimit:
+  curBalanceAmt:
+  amtPastDue:
+  guarantorIndicatorCode:
+  guarantorIndicatorCodeText:
+  guaranteeVolumeCode:
+  bankGuaranteeIndicatorCode:
+  bankGuaranteeIndicatorCodeText:
+  bankGuaranteeVolumeCode:
+  creditTotalAmt:
+  termsAmt:
+  amtOutstanding:
+  monthsReviewed:
+  numDays30:
+  numDays60:
+  numDays90:
+  paymtPat:
+  paymtPatStartDt:
+  lastUpdatedDt:
+  freezeFlag:
+  suppressFlag:
+  accountRating:
+  accountRatingText:
+  accountRatingDate:
+  paymentDueDate:
+  interestPaymentDueDate:
+  interestPaymentFrequencyCode:
+  interestPaymentFrequencyText:
+  businessCategory:
+  partnerStartDate:
+  principalOutstanding:
+  intOutstanding:
+  otherAmtOutstanding:
+  principalPastDue:
+  intPastDue:
+  otherAmtPastDue:
+  creditTotalMonetaryAmt:

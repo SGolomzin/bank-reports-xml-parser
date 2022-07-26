@@ -1,0 +1,54 @@
+name: OKS
+path:
+  - get: //c[@n='CAIS']
+  - find: s
+parseBy: attribute
+parse:
+  accountClass:
+  accountClosedDate:
+  accountHolderComments:
+  accountPaymentStatus:
+  accountSpecialStatus:
+  amountInsuredLoan:
+  amountOfFinance:
+  applicationNumber:
+  arrearsBalance:
+  cbrFinanceType:
+  consumerAccountNumber:
+  creditFacilityStatus:
+  creditLimit:
+  currency:
+  dateAccountAdded:
+  defaultDate:
+  duration:
+  durationUnit:
+  financeType:
+  fulfilmentDueDate:
+  infoPartFlag:
+  instalment:
+  insuredLoan:
+  interestPaymentDate:
+  interestRate:
+  lastMissedPaymentDate:
+  lastPaymentDate:
+  lastUpdateTS:
+  legalAccountNumber:
+  litigationDate:
+  monthOfLastUpdate:
+  numOfApplicants:
+  openDate:
+  outstandingBalance:
+  paymentFrequency:
+  paymentSource:
+  purposeOfFinance:
+  reasonForClosure:
+  recordBlockDisputeIndicator:
+  securedAmount:
+  securityEndDate:
+  securityStartDate:
+  subscriberComments:
+  totalAmountOfFinance:
+  totalCostOfFinanceInPercent:
+  typeOfSecurity:
+  worstPaymentStatus:
+  writeOffDate:
