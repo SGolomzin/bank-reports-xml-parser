@@ -1,7 +1,7 @@
 node_modules
 
-errors/*
-output/*
-reports/*
+errors/*.log
+output/*.xlsx
+reports/*.xml
 
 summary.json
