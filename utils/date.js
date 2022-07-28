@@ -28,7 +28,7 @@ const createCurrentDateString = (date) => {
 	return `${year}-${month}-${day}_${hours}꞉${minutes}꞉${seconds}`;
 }
 
-const parseDateValue = (value = '', format = ["YYYY-MM-DD hh:mm:ss", "MM-DD-YYYY hh:mm:ss", "DD-MM-YYYY hh:mm:ss"], strict = false) => {
+const parseDateValue = (value = '', format = ["YYYY-MM-DD HH:mm:ss", "MM-DD-YYYY HH:mm:ss", "DD-MM-YYYY HH:mm:ss"], strict = false) => {
 	return !moment(value, format, strict).isValid()
 		? "0x00"
 		: moment(value, format, strict);
