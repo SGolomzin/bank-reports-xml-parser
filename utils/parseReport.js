@@ -2,6 +2,7 @@ import libxmljs2 from 'libxmljs2';
 import * as ecnodeUtils from './encoding.js';
 import { templateOKSfilepath, templateNSKIfilepath } from '../config/index.js';
 import { readTemplate } from './readTemplate.js';
+import { parseDateValue } from './date.js';
 
 const parseReport = (filedata, filename = '') => {
 	return new Promise((resolve, reject) => {
@@ -55,9 +56,16 @@ const parseReport = (filedata, filename = '') => {
 						break;
 				}
 
-				let value = node.get(valueXPath)?.text() || reportTemplate.parse[key]?.replacer || '';
+				let value = node.get(valueXPath)?.text() || reportTemplate.parse[key]?.emptyValue || '';
+				let type = reportTemplate.parse[key]?.type || 's';
 
-				parsedData[keyName] = { "v": value, "t": reportTemplate.parse[key]?.type || 's' };
+				if (reportTemplate.parse[key]?.type === 'd' && value !== '') {
+					value = parseDateValue(value, reportTemplate.parse[key]?.dateFormat, reportTemplate.parse[key]?.dateFormatStrict)
+				} else if (reportTemplate.parse[key]?.type === 'd' && value === '') {
+					type = 's';
+				}
+
+				parsedData[keyName] = { "v": value, "t": type };
 			}
 
 			PARSED_REPORT.parsed.push(parsedData);

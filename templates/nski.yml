@@ -6,6 +6,7 @@ parseBy: element
 parse:
   collateral/fileSinceDt:
     as: collateral/fileSinceDt
+    type: d
   collateral/serialNum:
     as: collateral/serialNum
   collateral/agreementNumber:
@@ -18,12 +19,15 @@ parse:
     as: collateral/currencyCode
   collateral/collateralDate:
     as: collateral/collateralDate
+    type: d
   collateral/collateralExpirationDate:
     as: collateral/collateralExpirationDate
+    type: d
   collateral/collateral2Text:
     as: collateral/collateral2Text
   collateral/lastUpdatedDt:
     as: collateral/lastUpdatedDt
+    type: d
   collateral/freezeFlag:
     as: collateral/freezeFlag
   collateral/suppressFlag:
@@ -31,12 +35,17 @@ parse:
   uuid:
   serialNum:
   fileSinceDt:
+    type: d
   ownerIndic:
   ownerIndicText:
   openedDt:
+    type: d
   lastPaymtDt:
+    type: d
   closedDt:
+    type: d
   reportingDt:
+    type: d
   acctType:
   acctTypeText:
   currencyCode:
@@ -58,18 +67,24 @@ parse:
   numDays90:
   paymtPat:
   paymtPatStartDt:
+    type: d
   lastUpdatedDt:
+    type: d
   freezeFlag:
   suppressFlag:
   accountRating:
   accountRatingText:
   accountRatingDate:
+    type: d
   paymentDueDate:
+    type: d
   interestPaymentDueDate:
+    type: d
   interestPaymentFrequencyCode:
   interestPaymentFrequencyText:
   businessCategory:
   partnerStartDate:
+    type: d
   principalOutstanding:
   intOutstanding:
   otherAmtOutstanding:

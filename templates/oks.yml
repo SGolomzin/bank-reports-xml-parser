@@ -6,6 +6,7 @@ parseBy: attribute
 parse:
   accountClass:
   accountClosedDate:
+    type: d
   accountHolderComments:
   accountPaymentStatus:
   accountSpecialStatus:
@@ -19,24 +20,32 @@ parse:
   creditLimit:
   currency:
   dateAccountAdded:
+    type: d
   defaultDate:
+    type: d
   duration:
   durationUnit:
   financeType:
   fulfilmentDueDate:
+    type: d
   infoPartFlag:
   instalment:
   insuredLoan:
   interestPaymentDate:
+    type: d
   interestRate:
   lastMissedPaymentDate:
+    type: d
   lastPaymentDate:
+    type: d
   lastUpdateTS:
   legalAccountNumber:
   litigationDate:
+    type: d
   monthOfLastUpdate:
   numOfApplicants:
   openDate:
+    type: d
   outstandingBalance:
   paymentFrequency:
   paymentSource:
@@ -45,10 +54,13 @@ parse:
   recordBlockDisputeIndicator:
   securedAmount:
   securityEndDate:
+    type: d
   securityStartDate:
+    type: d
   subscriberComments:
   totalAmountOfFinance:
   totalCostOfFinanceInPercent:
   typeOfSecurity:
   worstPaymentStatus:
   writeOffDate:
+    type: d

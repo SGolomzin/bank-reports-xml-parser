@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 const formatConsoleDate = (date) => {
 	let hour = date.getHours();
 	let minutes = date.getMinutes();
@@ -25,7 +27,15 @@ const createCurrentDateString = (date) => {
 
 	return `${year}-${month}-${day}_${hours}꞉${minutes}꞉${seconds}`;
 }
+
+const parseDateValue = (value = '', format = ["YYYY-MM-DD hh:mm:ss", "MM-DD-YYYY hh:mm:ss", "DD-MM-YYYY hh:mm:ss"], strict = false) => {
+	return !moment(value, format, strict).isValid()
+		? "0x00"
+		: moment(value, format, strict);
+}
+
 export {
 	formatConsoleDate,
-	createCurrentDateString
+	createCurrentDateString,
+	parseDateValue
 }
