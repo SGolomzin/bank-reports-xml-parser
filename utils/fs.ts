@@ -1,10 +1,14 @@
 import fs from 'fs';
 import path from 'path';
 
-const transformFiles = (dirpath, filenames = [], fn = () => { }) => {
+const transformFiles = (
+	dirpath: string, 
+	filenames: string[] = [],
+	fn: { (buf: Buffer, filename?: string): Promise<any> } 
+) => {
 	return Promise.allSettled(filenames.map(
 		filename => fs.promises.readFile(path.resolve(dirpath, filename))
-			.then(filedata => fn(filedata, filename))
+			.then((buf: Buffer) => fn(buf, filename))
 			.catch(err => {
 				err.filename = filename;
 				return Promise.reject(err);
@@ -12,7 +16,7 @@ const transformFiles = (dirpath, filenames = [], fn = () => { }) => {
 	));
 };
 
-const checkFileExists = async (file) => {
+const checkFileExists = async (file: string): Promise<boolean> => {
 	try {
 		await fs.promises.access(file, fs.constants.F_OK);
 		return true;
