@@ -7,6 +7,7 @@ import { reportsFolder, errorsFolder, outputFolder } from './config/index.js';
 import { parseReport } from './utils/parseReport.js';
 import { transformFiles } from './utils/fs.js';
 import { formatConsoleDate, createCurrentDateString } from './utils/date.js';
+//@ts-ignore
 import json2xlsx from './utils/json2xlsx.cjs';
 import { declOfNum } from './utils/declOfNum.js';
 import * as log from './utils/log.js';
@@ -19,8 +20,8 @@ program
 		fs.promises.readdir(reportsFolder)
 			.then(filenames => transformFiles(reportsFolder, filenames, parseReport))
 			.then(results => {
-				const failedResults = results.filter(result => result.status === "rejected");
-				const fulfilledResults = results.filter(result => result.status === "fulfilled");
+				const failedResults = results.filter((result: PromiseSettledResult<unknown>): result is PromiseRejectedResult => result.status === "rejected");
+				const fulfilledResults = results.filter(<T>(result: PromiseSettledResult<T>): result is PromiseFulfilledResult<T> => result.status === "fulfilled");
 
 				log.msg(`\nОбработано ${results.length} ${declOfNum(results.length, ['отчет', 'отчета', 'отчетов'])}.`)
 

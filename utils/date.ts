@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-const formatConsoleDate = (date) => {
+const formatConsoleDate = (date: Date): string => {
 	let hour = date.getHours();
 	let minutes = date.getMinutes();
 	let seconds = date.getSeconds();
@@ -17,7 +17,7 @@ const formatConsoleDate = (date) => {
 		']';
 }
 
-const createCurrentDateString = (date) => {
+const createCurrentDateString = (date: Date): string => {
 	let year = date.getFullYear();
 	let month = String(date.getMonth() + 1).padStart(2, '0');
 	let day = String(date.getDate()).padStart(2, '0');
@@ -28,7 +28,11 @@ const createCurrentDateString = (date) => {
 	return `${year}-${month}-${day}_${hours}꞉${minutes}꞉${seconds}`;
 }
 
-const parseDateValue = (value = '', format = ["YYYY-MM-DD HH:mm:ss", "MM-DD-YYYY HH:mm:ss", "DD-MM-YYYY HH:mm:ss"], strict = false) => {
+const parseDateValue = (
+	value = '', 
+	format: string | string[] = ["YYYY-MM-DD HH:mm:ss", "MM-DD-YYYY HH:mm:ss", "DD-MM-YYYY HH:mm:ss"], 
+	strict = false
+): moment.Moment | "0x00" => {
 	return !moment(value, format, strict).isValid()
 		? "0x00"
 		: moment(value, format, strict);

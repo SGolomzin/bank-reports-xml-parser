@@ -2,7 +2,12 @@ const XLSX = require('xlsx');
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
 
-const json2xlsx = (jsondata = [], outputDir = '') => {
+interface Report {
+	filename: string;
+	parsed: any[];
+}
+
+const json2xlsx = (jsondata: Report[] = [], outputDir = '') => {
 	jsondata.forEach(report => {
 		let workbook = XLSX.utils.book_new();
 		let sheet = XLSX.utils.json_to_sheet(report.parsed);
