@@ -14,7 +14,6 @@
   "dependencies": {
     "chalk": "^5.0.1",
     "commander": "^9.4.0",
-    "exceljs": "^4.3.0",
     "iconv-lite": "^0.6.3",
     "libxmljs2": "^0.30.1",
     "moment": "^2.29.4",
