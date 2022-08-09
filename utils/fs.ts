@@ -4,7 +4,7 @@ import path from 'path';
 const transformFiles = (
 	dirpath: string, 
 	filenames: string[] = [],
-	fn: { (buf: Buffer, filename?: string): Promise<any> } 
+	fn: { (buf: Buffer, filename?: string): Promise<unknown> } 
 ) => {
 	return Promise.allSettled(filenames.map(
 		filename => fs.promises.readFile(path.resolve(dirpath, filename))
