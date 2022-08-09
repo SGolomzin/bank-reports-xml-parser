@@ -63,7 +63,10 @@ program
 	.action((options) => {
 		fs.promises.readFile('summary.json', 'utf-8')
 			.then(filedata => JSON.parse(filedata))
-			.then(json => json2xlsx(json, options.path || outputFolder))
+			.then(json => json.length ?
+				json2xlsx(json, options.path || outputFolder)
+				: Promise.reject(Error("В summary.json нет данных для обработки"))
+			)
 			.then(_ => log.done(`Файлы успешно сформированы!`))
 			.catch(err => log.error(
 				'\nОй, что-то пошло не так!\n'
