@@ -18,6 +18,7 @@ program
 	.description('Перевести отчеты папки reports в файл summary.json')
 	.action(() => {
 		fs.promises.readdir(reportsFolder)
+			.then(filenames => filenames.filter(filename => /\.xml$/.test(filename)))
 			.then(filenames => transformFiles(reportsFolder, filenames, parseReport))
 			.then(results => {
 				const failedResults = results.filter((result: PromiseSettledResult<unknown>): result is PromiseRejectedResult => result.status === "rejected");
