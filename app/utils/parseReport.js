@@ -3,6 +3,7 @@ import * as ecnodeUtils from './encoding.js';
 import { templateOKSfilepath, templateNSKIfilepath } from '../config/index.js';
 import { readTemplate } from './readTemplate.js';
 import { parseDateValue } from './date.js';
+import { allValuesEmpty } from './allValuesEmpty.js';
 const parseReport = (buf, filename = '') => {
     return new Promise((resolve, reject) => {
         let filedata = "";
@@ -60,7 +61,8 @@ const parseReport = (buf, filename = '') => {
                 }
                 parsedData[keyName] = { "v": value, "t": type };
             }
-            PARSED_REPORT.parsed.push(parsedData);
+            if (!allValuesEmpty(parsedData))
+                PARSED_REPORT.parsed.push(parsedData);
         }
         return resolve(PARSED_REPORT);
     });

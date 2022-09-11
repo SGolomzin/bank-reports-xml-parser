@@ -3,6 +3,7 @@ import * as ecnodeUtils from './encoding.js';
 import { templateOKSfilepath, templateNSKIfilepath } from '../config/index.js';
 import { readTemplate } from './readTemplate.js';
 import { parseDateValue } from './date.js';
+import { allValuesEmpty } from './allValuesEmpty.js';
 
 interface Report {
 	filename: string;
@@ -94,7 +95,11 @@ const parseReport = (buf: Buffer, filename = '') => {
 				let type = reportTemplate.parse[key]?.type || 's';
 
 				if (reportTemplate.parse[key]?.type === 'd' && value !== '') {
-					value = parseDateValue(value, reportTemplate.parse[key]?.dateFormat, reportTemplate.parse[key]?.dateFormatStrict)
+					value = parseDateValue(
+						value, 
+						reportTemplate.parse[key]?.dateFormat, 
+						reportTemplate.parse[key]?.dateFormatStrict
+					)
 				} else if (reportTemplate.parse[key]?.type === 'd' && value === '') {
 					type = 's';
 				}
@@ -102,7 +107,7 @@ const parseReport = (buf: Buffer, filename = '') => {
 				parsedData[keyName] = { "v": value, "t": type };
 			}
 
-			PARSED_REPORT.parsed.push(parsedData);
+			if (!allValuesEmpty(parsedData)) PARSED_REPORT.parsed.push(parsedData);
 		}
 
 		return resolve(PARSED_REPORT);
