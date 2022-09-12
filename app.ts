@@ -15,16 +15,19 @@ import * as log from './utils/log.js';
 program
 	.command('parse')
 	.alias('p')
-	.description('Перевести отчеты папки reports в файл summary.json')
-	.action(() => {
+	.option('--path <path>', 'Путь куда сохранить файлы')
+	.description('Перевести отчеты из папки reports в файл summary.json\n Сформировать своды в формате xlsx на основе summary.json')
+	.action((options) => {
 		fs.promises.readdir(reportsFolder)
-			.then(filenames => filenames.filter(filename => /\.xml$/.test(filename)))
+			.then(filenames => {
+				const filtered = filenames.filter(filename => /\.xml$/.test(filename));
+				log.msg(`\nОбнаружено ${filtered.length} XML ${declOfNum(filtered.length, ['отчет', 'отчета', 'отчетов'])}.`)
+				return filtered;
+			})
 			.then(filenames => transformFiles(reportsFolder, filenames, parseReport))
 			.then(results => {
 				const failedResults = results.filter((result: PromiseSettledResult<unknown>): result is PromiseRejectedResult => result.status === "rejected");
 				const fulfilledResults = results.filter(<T>(result: PromiseSettledResult<T>): result is PromiseFulfilledResult<T> => result.status === "fulfilled");
-
-				log.msg(`\nОбработано ${results.length} ${declOfNum(results.length, ['отчет', 'отчета', 'отчетов'])}.`)
 
 				if (failedResults.length) {
 					const logfilename = createCurrentDateString(new Date) + '.log';
@@ -44,13 +47,20 @@ program
 					log.done('\nОбработка всех отчетов прошла без ошибок.\n')
 				}
 
-				return fs.promises.writeFile(
+				fs.promises.writeFile(
 					"summary.json",
 					JSON.stringify(
 						fulfilledResults.map(fulfilledResult => fulfilledResult.value)
 					)
 				)
+
+				return fulfilledResults.map(fulfilledResult => fulfilledResult.value)
 			})
+			.then(resultsArray => resultsArray.length 
+				? json2xlsx(resultsArray, options.path || outputFolder)
+				: Promise.reject(Error("В summary.json нет данных для обработки"))
+			)
+			.then(_ => log.done(`Файлы успешно сформированы!`))
 			.catch(err => log.error(
 				'\nОй, что-то пошло не так!\n'
 				+ err.stack
@@ -60,13 +70,13 @@ program
 program
 	.command('compound')
 	.alias('c')
-	.option('--path <path>', 'Путь куда сохранить файл')
+	.option('--path <path>', 'Путь куда сохранить файлы')
 	.description('Сформировать своды в формате xlsx на основе summary.json')
 	.action((options) => {
 		fs.promises.readFile('summary.json', 'utf-8')
 			.then(filedata => JSON.parse(filedata))
-			.then(json => json.length ?
-				json2xlsx(json, options.path || outputFolder)
+			.then(dataArray => dataArray.length ?
+				json2xlsx(dataArray, options.path || outputFolder)
 				: Promise.reject(Error("В summary.json нет данных для обработки"))
 			)
 			.then(_ => log.done(`Файлы успешно сформированы!`))
