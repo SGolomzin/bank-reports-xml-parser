@@ -1,6 +1,6 @@
 {
   "name": "bank-reports",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Программа для получения необходимых данных из банковских XML отчетов и перевода их в табличный формат xlsx.",
   "main": "app/app.js",
   "type": "module",
