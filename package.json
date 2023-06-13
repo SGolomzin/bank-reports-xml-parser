@@ -18,8 +18,8 @@
     "libxmljs2": "^0.30.1",
     "moment": "^2.29.4",
     "uuid": "^8.3.2",
-    "xlsx": "^0.18.5",
-    "yaml": "^2.1.1"
+    "xlsx": "^0.19.3",
+    "yaml": "^2.2.2"
   },
   "devDependencies": {
     "@types/node": "^18.6.5",
